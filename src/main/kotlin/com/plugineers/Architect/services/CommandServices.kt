@@ -1,8 +1,9 @@
 package com.plugineers.Architect.services
 
 import com.google.inject.Inject
+import com.plugineers.Architect.entities.BrushRegistrar.Brush
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
-import com.plugineers.Architect.entities.BrushRegistrar.Terraformer
+import com.plugineers.Architect.entities.Terraformer
 import com.plugineers.Architect.entities.User
 import com.plugineers.Architect.entities.enums.ActionType
 import com.plugineers.Architect.entities.enums.PlayerAccess
@@ -142,6 +143,10 @@ class CommandServices<T : CoreBrush> {
         val user: User = playerData.getPlayerData(uniqueId)
         val brush: T? = playerData.getCurrentBrush(uniqueId)
         brush?.onAction(user, actionType, world, clickedBlock, isFace)
+    }
+
+    fun getPlayerBrush(uniqueId: UUID?): T {
+       return playerData.getCurrentBrush(uniqueId!!)
     }
 
 }
