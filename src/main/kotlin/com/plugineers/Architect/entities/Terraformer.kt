@@ -1,4 +1,4 @@
-package com.plugineers.Architect.entities.BrushRegistrar
+package com.plugineers.Architect.entities
 
 import org.bukkit.util.Vector
 import java.util.*

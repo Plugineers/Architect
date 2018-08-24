@@ -1,4 +1,4 @@
-package com.plugineers.Architect.entities.brushes.terraforming
+package com.plugineers.Architect.entities.brushes.Utils
 
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
 import com.plugineers.Architect.entities.User
@@ -7,7 +7,7 @@ import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.util.Vector
 
-class CreateTemplateBrush : CoreBrush() {
+class Spiral : CoreBrush() {
     override fun onCommand(player: Player, args: MutableList<String>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -35,6 +35,7 @@ class Disc : CoreBrush() {
     override fun onAction(user: User, actionType: ActionType, world: World, clickPoint: Vector, isFaceClicked: Boolean) {
         boundingCylinder = BoundingCylinder(world, clickPoint, user.size.toDouble(), depth)
         boundingCylinder!!.setMaterials(user.material, user.blockData)
+
     }
 
 

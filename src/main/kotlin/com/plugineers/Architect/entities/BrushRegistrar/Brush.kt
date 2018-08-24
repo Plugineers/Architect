@@ -1,5 +1,7 @@
 package com.plugineers.Architect.entities.BrushRegistrar
 
+import com.plugineers.Architect.entities.enums.BrushType
+
 annotation class Brush(
         val name: String,
         val command: String,

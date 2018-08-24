@@ -1,5 +1,6 @@
 package com.plugineers.Architect.entities.BrushRegistrar
 
+import com.plugineers.Architect.entities.Terraformer
 import com.plugineers.Architect.entities.User
 import com.plugineers.Architect.entities.enums.ActionType
 import com.plugineers.Architect.exceptions.BrushException

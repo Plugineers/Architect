@@ -1,4 +1,4 @@
-package com.plugineers.Architect.entities.BrushRegistrar
+package com.plugineers.Architect.entities.enums
 
 enum class BrushType {
     TOOL,

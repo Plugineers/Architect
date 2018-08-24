@@ -1,7 +1,6 @@
 package com.plugineers.Architect.entities
 
 
-import com.plugineers.Architect.entities.BrushRegistrar.Terraformer
 import com.plugineers.Architect.entities.enums.PlayerAccess
 import org.bukkit.Material
 import org.bukkit.block.data.BlockData

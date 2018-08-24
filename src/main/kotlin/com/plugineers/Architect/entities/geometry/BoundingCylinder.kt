@@ -35,4 +35,8 @@ class BoundingCylinder(var world: World, private var centerPoint: Vector, privat
         }
     }
 
+    fun applyChanges() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

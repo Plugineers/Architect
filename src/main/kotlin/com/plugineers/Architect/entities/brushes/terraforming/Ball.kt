@@ -1,7 +1,7 @@
 package com.plugineers.Architect.entities.brushes.terraforming
 
 import com.plugineers.Architect.entities.BrushRegistrar.Brush
-import com.plugineers.Architect.entities.BrushRegistrar.BrushType
+import com.plugineers.Architect.entities.enums.BrushType
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
 import com.plugineers.Architect.entities.User
 import com.plugineers.Architect.entities.enums.ActionType
