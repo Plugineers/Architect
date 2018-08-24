@@ -2,51 +2,41 @@ package com.plugineers.Architect.commands
 
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
 import com.plugineers.Architect.exceptions.BrushException
+import com.plugineers.Architect.exceptions.CommandException
 import com.plugineers.Architect.services.CommandServices
+import com.plugineers.Architect.util.cmdManager.CommandHandler
 import org.apache.commons.lang.StringUtils
 import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import javax.inject.Inject
 
-class BrushCommand<T : CoreBrush> : CommandExecutor {
-
-    @get:Inject
-    private lateinit var commandService: CommandServices<T>
-
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
-        val player = sender as Player
-
+class BrushCommand<T :  CoreBrush> : CommandHandler<T>() {
+    override fun execute(sender: CommandSender?, str: String?, args: Array<out String>): Boolean {
+        var player: Player = sender as Player
         if (args.isEmpty()) {
-            val brushSize = commandService.getCurrentSize(player.uniqueId)
-            player.sendMessage("Your current brush size is: $brushSize")
-        } else if (args.size == 1 && StringUtils.isNumeric(args[0])) {
-            var returnData: Int = commandService.setSize(player.uniqueId, args[0].toInt())
+            val currentBrush: T = commandService.getPlayerBrush(player.uniqueId)
+            val brushSize: Int = commandService.getCurrentSize(player.uniqueId)!!
 
-        } else {
-            val mutableList: MutableList<String> = args.toMutableList()
-
-            commandService.onBrushCommandExecute(player, args[0], mutableList)
+            player.sendMessage("name: ${currentBrush.name}")
+            player.sendMessage("size: $brushSize")
+            player.sendMessage("Terraformer: $currentBrush.cu")
         }
-
-        if (args.isEmpty()) {
-
-        } else if (args.size == 1) {
+        if (args.size == 1) {
             if (StringUtils.isNumeric(args[0])) {
-
-
+                try {
+                    commandService.setSize(player.uniqueId, args[0].toInt())
+                } catch (e : CommandException) {
+                    sender.sendMessage(e.getFormattedMessage())
+                }
             } else {
                 try {
-
-                } catch (be: BrushException) {
-                    sender.sendMessage(be.message)
+                    //sets the brush.
+                    commandService.setBrush(player.uniqueId, args[0])
+                } catch (e : CommandException) {
+                    sender.sendMessage(e.getFormattedMessage())
                 }
             }
-        } else {
-            var response: Unit = commandService.setBrush(player.uniqueId, args[0])
-
-
         }
         return true
     }
