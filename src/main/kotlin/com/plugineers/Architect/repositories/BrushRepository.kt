@@ -1,7 +1,7 @@
 package com.plugineers.Architect.repositories
 
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
-import com.plugineers.Architect.entities.BrushRegistrar.Terraformer
+import com.plugineers.Architect.entities.Terraformer
 
 interface BrushRepository<T : CoreBrush> {
     fun getBrush(name: String): T?

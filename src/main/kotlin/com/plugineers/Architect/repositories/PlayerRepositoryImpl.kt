@@ -7,10 +7,13 @@ import com.google.inject.Singleton
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
 import com.plugineers.Architect.entities.User
 import com.plugineers.Architect.entities.enums.PlayerAccess
+import com.plugineers.Architect.generated.Tables
+import com.plugineers.Architect.generated.Tables.*
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.plugin.Plugin
 import org.jooq.DSLContext
+import org.jooq.Table
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -18,7 +21,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 @Singleton
-class PlayerRepositoryImpl<T : CoreBrush> : PlayerDataRepository<T> {
+class PlayerRepositoryImpl<out T : CoreBrush>: PlayerDataRepository<T> {
     private val gson: Gson = Gson()
     @get:Inject
     lateinit var dslContext: DSLContext
@@ -31,10 +34,9 @@ class PlayerRepositoryImpl<T : CoreBrush> : PlayerDataRepository<T> {
             })
             .build(object : CacheLoader<UUID, User>() {
                 override fun load(key: UUID): User {
-                    return getUserData(key) as User
+                    return getUserData(key)
                 }
             })
-
 
     private var currentBrush: Cache<UUID, T> = CacheBuilder.newBuilder()
             .concurrencyLevel(4)
@@ -43,7 +45,11 @@ class PlayerRepositoryImpl<T : CoreBrush> : PlayerDataRepository<T> {
 
 
     private fun getUserData(uuid : UUID) : User {
-        //TODO
+        dslContext.select(USER.UUID, USER.PLAYERACCESS, USER.TERRAFORMER, USER.MATERIAL, USER.MATERIAL)
+                .from(USER)
+                .where(USER.UUID.eq(uuid))
+                .fetchInto(User::class.java)
+        return playerData?.getIfPresent(uuid)!!
     }
     //TODO implement
     private fun getBrushData(uuid: UUID): T? {

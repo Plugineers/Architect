@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.plugineers.Architect.entities.BrushRegistrar.CoreBrush
-import com.plugineers.Architect.entities.BrushRegistrar.Terraformer
+import com.plugineers.Architect.entities.Terraformer
 import org.bukkit.plugin.Plugin
 import java.nio.file.Files
 import java.nio.file.Path

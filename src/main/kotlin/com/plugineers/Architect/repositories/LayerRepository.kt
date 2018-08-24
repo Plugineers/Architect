@@ -1,8 +1,11 @@
 package com.plugineers.Architect.repositories
 
+import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableTable
 import com.plugineers.Architect.entities.Layer
 import com.plugineers.Architect.entities.PlayerAction
+import com.plugineers.Architect.generated.tables.records.LayerRecord
+import org.jooq.TableField
 import java.util.*
 
 interface LayerRepository {
@@ -15,4 +18,8 @@ interface LayerRepository {
     fun getActiveLayer(uuid: UUID): Layer
     fun evictAction(uuid: UUID, name: String): PlayerAction
     fun evictActions(uuid: UUID, name: String, count: Int): List<PlayerAction>
+    fun getAllLayers(uniqueId: UUID?): ImmutableList<Layer>
+    fun createLayer(uuid: UUID, layer: Layer)
+    fun hasLayer(uuid: UUID, layer: String): Boolean
+    fun <T> update(uuid: UUID, layer : String, table: TableField<LayerRecord, T>,  value: T)
 }
